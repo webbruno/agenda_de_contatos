@@ -15,10 +15,26 @@ AGENDA['Andre'] = {
 
 def mostrar_contatos():
     for contato in AGENDA:
-        print(f'Nome: {contato}')
-        print(f'Telefone: {AGENDA[contato]["telefone"]}')
-        print(f'email: {AGENDA[contato]["email"]}')
-        print(f'Endereço: {AGENDA[contato]["endereco"]}')
+        buscar_contato(contato)
         print('--------------------')
 
+
+def buscar_contato(contato):
+    print(f'Nome: {contato}')
+    print(f'Telefone: {AGENDA[contato]["telefone"]}')
+    print(f'email: {AGENDA[contato]["email"]}')
+    print(f'Endereço: {AGENDA[contato]["endereco"]}')
+
+
+def incluir_contato(nome, telefone, email, endereco):
+    AGENDA[nome] = {
+        'telefone': telefone,
+        'email': email,
+        'endereco': endereco,
+    }
+    print(f'>>>>Contato {nome} adicionado com sucesso\n')
+
+
+mostrar_contatos()
+incluir_contato('Sandra','11965102064','sandra.pcosta@gmail.com','Teodoro Bernardo do Nascimento')
 mostrar_contatos()
