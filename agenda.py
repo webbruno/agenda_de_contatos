@@ -73,12 +73,27 @@ def excluir_contato(contato):
         print()
 
 
+def exportar_contatos():
+    try:
+        with open('agenda.csv','w',encoding='utf-8') as arquivo:
+            arquivo.write('nome,telefone,email,endereco\n')
+            for contato in AGENDA:
+                telefone = AGENDA[contato]['telefone']
+                email = AGENDA[contato]['email']
+                endereco = AGENDA[contato]['endereco']
+                arquivo.write(f'{contato},{telefone},{email},{endereco}\n')
+        print('>>>> Agenda exportada com sucesso')
+    except:
+        print('>>>> Algum erro ocorreu ao exportar contatos')
+
+
 def imprimir_menu():
     print('1 - Mostrar todos os contatos da agenda')
     print('2 - Buscar contato')
     print('3 - Incluir contato')
     print('4 - Editar contato')
     print('5 - Excluir contato')
+    print('6 - Exportar contatos para CSV')
     print('0 - Fechar o programa')
 
 
@@ -99,7 +114,9 @@ if __name__ == '__main__':
             
             try:
                 AGENDA[contato]
+                print()
                 print(f'>>>> Ccontato {contato} já existente')
+                print()
             except KeyError:
                 incluir_editar_contato(contato)
         elif opcao == '4':
@@ -107,13 +124,19 @@ if __name__ == '__main__':
 
             try:
                 AGENDA[contato]
+                print()
                 print(f'>>>> Editando contato: {contato}')
+                print()
                 incluir_editar_contato(contato)
             except KeyError:
+                print()
                 print('>>>> Contato inexistente')
+                print()
         elif opcao == '5':
             contato = input('Digite o nome do contato: ')
             excluir_contato(contato)
+        elif opcao == '6':
+            exportar_contatos()
         elif opcao == '0':
             print('Fechando o programa')
             break
